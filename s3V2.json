@@ -17,7 +17,7 @@
   "gnetId": 575,
   "graphTooltip": 0,
   "id": 50,
-  "iteration": 1609952109194,
+  "iteration": 1609957578823,
   "links": [],
   "panels": [
     {
@@ -321,7 +321,7 @@
             "query": {
               "params": [
                 "A",
-                "5m",
+                "1h",
                 "now"
               ]
             },
@@ -336,7 +336,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "Bucket Size -  *-backup-mongo alert",
+        "name": "Bucket Size -  ah-backup-mongo alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -458,7 +458,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Bucket Size -  *-backup-mongo",
+      "title": "Bucket Size -  ah-backup-mongo",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -504,7 +504,7 @@
             "evaluator": {
               "params": [
                 29864,
-                15339
+                21855
               ],
               "type": "outside_range"
             },
@@ -523,13 +523,34 @@
               "type": "avg"
             },
             "type": "query"
+          },
+          {
+            "evaluator": {
+              "params": [],
+              "type": "no_value"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "24h",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
           }
         ],
         "executionErrorState": "alerting",
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "Number  Objects - *-backup-mongo alert",
+        "name": "Number  Objects - ah-backup-mongo alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -608,7 +629,7 @@
             "filter": ""
           },
           "dimensions": {
-            "BucketName": "*-backup-mongo",
+            "BucketName": "ah-backup-mongo",
             "StorageType": "AllStorageTypes"
           },
           "expression": "",
@@ -616,7 +637,7 @@
           "group": {
             "filter": ""
           },
-          "hide": false,
+          "hide": true,
           "highResolution": false,
           "host": {
             "filter": ""
@@ -646,7 +667,7 @@
             "filter": ""
           },
           "dimensions": {
-            "BucketName": "*-backup-mongo",
+            "BucketName": "ah-backup-mongo",
             "StorageType": "AllStorageTypes"
           },
           "expression": "",
@@ -654,7 +675,7 @@
           "group": {
             "filter": ""
           },
-          "hide": true,
+          "hide": false,
           "highResolution": false,
           "host": {
             "filter": ""
@@ -692,13 +713,13 @@
           "fill": true,
           "line": true,
           "op": "lt",
-          "value": 15339
+          "value": 21855
         }
       ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Number  Objects - *-backup-mongo",
+      "title": "Number  Objects - ah-backup-mongo",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -741,8 +762,8 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
-    "monitoringartist",
-    "cloudwatch"
+    "cloudwatch",
+    "S3 metrics"
   ],
   "templating": {
     "list": [
@@ -769,9 +790,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
+          "selected": true,
+          "text": "sa-east-1",
+          "value": "sa-east-1"
         },
         "datasource": "$datasource",
         "definition": "regions()",
@@ -797,8 +818,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "*",
-          "value": "*"
+          "text": "ah-backup-mongo",
+          "value": "ah-backup-mongo"
         },
         "datasource": "$datasource",
         "definition": "dimension_values($region,AWS/S3,NumberOfObjects,BucketName)",
@@ -823,7 +844,7 @@
     ]
   },
   "time": {
-    "from": "now-6M",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -854,5 +875,5 @@
   "timezone": "browser",
   "title": "s3 storage bucket",
   "uid": "AWSS31iWk",
-  "version": 10
+  "version": 13
 }
