@@ -17,7 +17,7 @@
   "gnetId": 575,
   "graphTooltip": 0,
   "id": 50,
-  "iteration": 1609957578823,
+  "iteration": 1610110875934,
   "links": [],
   "panels": [
     {
@@ -26,6 +26,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "$datasource",
+      "decimals": null,
       "editable": true,
       "error": false,
       "fieldConfig": {
@@ -50,8 +51,10 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
+        "hideEmpty": false,
         "max": true,
         "min": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": true
@@ -79,7 +82,7 @@
             "filter": ""
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "StorageType": "StandardStorage"
           },
           "expression": "",
@@ -115,6 +118,7 @@
           "alias": "",
           "dimensions": {},
           "expression": "",
+          "hide": true,
           "id": "",
           "matchExact": true,
           "metricName": "",
@@ -310,18 +314,16 @@
         "conditions": [
           {
             "evaluator": {
-              "params": [
-                659100184627
-              ],
-              "type": "gt"
+              "params": [],
+              "type": "no_value"
             },
             "operator": {
               "type": "and"
             },
             "query": {
               "params": [
-                "A",
-                "1h",
+                "B",
+                "48h",
                 "now"
               ]
             },
@@ -336,7 +338,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "Bucket Size -  ah-backup-mongo alert",
+        "name": "Bucket Size -  backup-mongo alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -349,7 +351,24 @@
       "error": false,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
         "overrides": []
       },
@@ -385,7 +404,7 @@
       "percentage": false,
       "pluginVersion": "7.3.4",
       "pointradius": 5,
-      "points": false,
+      "points": true,
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
@@ -406,7 +425,7 @@
           "group": {
             "filter": ""
           },
-          "hide": false,
+          "hide": true,
           "highResolution": false,
           "host": {
             "filter": ""
@@ -432,33 +451,30 @@
         },
         {
           "alias": "",
-          "dimensions": {},
+          "dimensions": {
+            "BucketName": "backup-mongo",
+            "StorageType": "StandardIAStorage"
+          },
           "expression": "",
+          "hide": false,
           "id": "",
           "matchExact": true,
-          "metricName": "",
-          "namespace": "",
+          "metricName": "BucketSizeBytes",
+          "namespace": "AWS/S3",
           "period": "",
+          "queryMode": "Metrics",
           "refId": "B",
-          "region": "default",
+          "region": "sa-east-1",
           "statistics": [
             "Average"
           ]
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 659100184627
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Bucket Size -  ah-backup-mongo",
+      "title": "Bucket Size -  backup-mongo",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -497,63 +513,6 @@
       }
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                29864,
-                21855
-              ],
-              "type": "outside_range"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          },
-          {
-            "evaluator": {
-              "params": [],
-              "type": "no_value"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "24h",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Number  Objects - ah-backup-mongo alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -629,7 +588,7 @@
             "filter": ""
           },
           "dimensions": {
-            "BucketName": "ah-backup-mongo",
+            "BucketName": "backup-mongo",
             "StorageType": "AllStorageTypes"
           },
           "expression": "",
@@ -637,7 +596,7 @@
           "group": {
             "filter": ""
           },
-          "hide": true,
+          "hide": false,
           "highResolution": false,
           "host": {
             "filter": ""
@@ -667,7 +626,7 @@
             "filter": ""
           },
           "dimensions": {
-            "BucketName": "ah-backup-mongo",
+            "BucketName": "backup-mongo",
             "StorageType": "AllStorageTypes"
           },
           "expression": "",
@@ -675,7 +634,7 @@
           "group": {
             "filter": ""
           },
-          "hide": false,
+          "hide": true,
           "highResolution": false,
           "host": {
             "filter": ""
@@ -696,30 +655,15 @@
           "region": "sa-east-1",
           "returnData": false,
           "statistics": [
-            "Sum"
+            "Average"
           ]
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 29864
-        },
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "lt",
-          "value": 21855
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Number  Objects - ah-backup-mongo",
+      "title": "Number  Objects - backup-mongo",
       "tooltip": {
         "msResolution": false,
         "shared": true,
@@ -737,6 +681,179 @@
       "yaxes": [
         {
           "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CloudWatch",
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.4",
+      "pointradius": 5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "application": {
+            "filter": ""
+          },
+          "dimensions": {
+            "BucketName": "*",
+            "StorageType": "StandardStorage"
+          },
+          "expression": "",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "hide": false,
+          "highResolution": false,
+          "host": {
+            "filter": ""
+          },
+          "id": "",
+          "item": {
+            "filter": ""
+          },
+          "matchExact": true,
+          "metricName": "BucketSizeBytes",
+          "mode": 0,
+          "namespace": "AWS/S3",
+          "options": {
+            "showDisabledItems": false
+          },
+          "period": "",
+          "refId": "A",
+          "region": "sa-east-1",
+          "returnData": false,
+          "statistics": [
+            "Average"
+          ]
+        },
+        {
+          "alias": "",
+          "dimensions": {
+            "BucketName": "backup-mongo",
+            "StorageType": "StandardIAStorage"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "matchExact": true,
+          "metricName": "BucketSizeBytes",
+          "namespace": "AWS/S3",
+          "period": "",
+          "queryMode": "Metrics",
+          "refId": "B",
+          "region": "sa-east-1",
+          "statistics": [
+            "Average"
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Bucket Size -  backup-mongo - Test",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -791,8 +908,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "sa-east-1",
-          "value": "sa-east-1"
+          "text": "default",
+          "value": "default"
         },
         "datasource": "$datasource",
         "definition": "regions()",
@@ -818,8 +935,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "ah-backup-mongo",
-          "value": "ah-backup-mongo"
+          "text": "*",
+          "value": "*"
         },
         "datasource": "$datasource",
         "definition": "dimension_values($region,AWS/S3,NumberOfObjects,BucketName)",
@@ -844,7 +961,7 @@
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {
@@ -875,5 +992,5 @@
   "timezone": "browser",
   "title": "s3 storage bucket",
   "uid": "AWSS31iWk",
-  "version": 13
+  "version": 49
 }
